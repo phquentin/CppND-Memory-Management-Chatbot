@@ -44,7 +44,107 @@ ChatBot::~ChatBot()
 
 //// STUDENT CODE
 ////
+// copy constructor
+ChatBot::ChatBot(const ChatBot &source)
+{
+    std::cout << "ChatBot Copy Constructor" << std::endl;
 
+    if(_image != NULL)
+    {
+        delete _image;
+        _image = NULL;
+    }
+    
+    // owned - deep copy
+    _image = new wxBitmap(*source._image);
+
+    // not owned - shallow copy
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    _currentNode = source._currentNode;
+
+}
+
+// copy assignement operator
+ChatBot& ChatBot::operator=(const ChatBot &source)
+{
+    std::cout << "ChatBot Copy Assigment Operator" << std::endl;
+
+    if (this == &source)
+    {
+        return *this;
+    }
+
+    // owned - deep copy
+    _image = new wxBitmap(*source._image);
+
+    // not owned - shallow copy
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    _currentNode = source._currentNode;
+
+    return *this;  
+}
+
+// move constructor
+ChatBot::ChatBot (ChatBot &&source)
+{
+    std::cout << "ChatBot Move Constructor" << std::endl;
+    if(_image != NULL)
+    {
+        delete _image;
+        _image = NULL;
+    }
+
+    if(source._image != NULL)
+    {
+        _image = source._image;
+        source._image = NULL;
+    }
+
+    _chatLogic = source._chatLogic;
+    source._chatLogic = nullptr;
+
+    _rootNode = source._rootNode;
+    source._rootNode = nullptr;
+
+    _currentNode = source._currentNode;
+    source._currentNode = nullptr;
+}
+
+// move assignment operator
+ChatBot& ChatBot::operator=(ChatBot &&source)
+{
+    std::cout << "ChatBot Move Assignment Operator" << std::endl;
+
+    if (this == &source)
+    {
+        return *this;
+    }
+
+    if(_image != NULL)
+    {
+        delete _image;
+        _image = NULL;
+    }
+
+    if(source._image != NULL)
+    {
+        _image = source._image;
+        source._image = NULL;
+    }
+
+    _chatLogic = source._chatLogic;
+    source._chatLogic = nullptr;
+
+    _rootNode = source._rootNode;
+    source._rootNode = nullptr;
+
+    _currentNode = source._currentNode;
+    source._currentNode = nullptr;
+
+    return *this;
+}
 ////
 //// EOF STUDENT CODE
 

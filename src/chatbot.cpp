@@ -60,6 +60,7 @@ ChatBot::ChatBot(const ChatBot &source)
 
     // not owned - shallow copy
     _chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
     _rootNode = source._rootNode;
     _currentNode = source._currentNode;
 
@@ -80,6 +81,7 @@ ChatBot& ChatBot::operator=(const ChatBot &source)
 
     // not owned - shallow copy
     _chatLogic = source._chatLogic;
+    _chatLogic->SetChatbotHandle(this);
     _rootNode = source._rootNode;
     _currentNode = source._currentNode;
 
@@ -104,6 +106,7 @@ ChatBot::ChatBot (ChatBot &&source)
 
     _chatLogic = source._chatLogic;
     source._chatLogic = nullptr;
+    _chatLogic->SetChatbotHandle(this);
 
     _rootNode = source._rootNode;
     source._rootNode = nullptr;
@@ -136,6 +139,7 @@ ChatBot& ChatBot::operator=(ChatBot &&source)
 
     _chatLogic = source._chatLogic;
     source._chatLogic = nullptr;
+    _chatLogic->SetChatbotHandle(this);
 
     _rootNode = source._rootNode;
     source._rootNode = nullptr;

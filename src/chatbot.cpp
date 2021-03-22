@@ -48,13 +48,7 @@ ChatBot::~ChatBot()
 ChatBot::ChatBot(const ChatBot &source)
 {
     std::cout << "ChatBot Copy Constructor" << std::endl;
-
-    if(_image != NULL)
-    {
-        delete _image;
-        _image = NULL;
-    }
-    
+ 
     // owned - deep copy
     _image = new wxBitmap(*source._image);
 
@@ -92,12 +86,7 @@ ChatBot& ChatBot::operator=(const ChatBot &source)
 ChatBot::ChatBot (ChatBot &&source)
 {
     std::cout << "ChatBot Move Constructor" << std::endl;
-    if(_image != NULL)
-    {
-        delete _image;
-        _image = NULL;
-    }
-
+   
     if(source._image != NULL)
     {
         _image = source._image;
@@ -123,12 +112,6 @@ ChatBot& ChatBot::operator=(ChatBot &&source)
     if (this == &source)
     {
         return *this;
-    }
-
-    if(_image != NULL)
-    {
-        delete _image;
-        _image = NULL;
     }
 
     if(source._image != NULL)
